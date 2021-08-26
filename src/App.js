@@ -14,6 +14,7 @@ import ProtectedRoute from "./components/ProtectedRoute";
 import NewQuestion from "./pages/NewQuestion";
 import NavBar from "./components/NavBar";
 import Logout from "./components/Logout";
+import { getQuestions } from "./actions/question";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -21,6 +22,7 @@ const App = () => {
 
   React.useEffect(() => {
     dispatch(getUsers());
+    dispatch(getQuestions());
   }, [dispatch]);
 
   return (
