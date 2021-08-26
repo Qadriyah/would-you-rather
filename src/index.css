@@ -58,3 +58,7 @@ code {
 .pr-2 {
   padding-right: 1em;
 }
+
+.bg-secondary {
+  background-color: #f2f2f2;
+}

@@ -33,6 +33,8 @@ const Login = ({ history, user }) => {
           margin: "-10px -10px 0 -10px",
           backgroundColor: "#f2f2f2",
           height: "100px",
+          borderTopRightRadius: "10px",
+          borderTopLeftRadius: "10px",
         }}
       >
         <div>
