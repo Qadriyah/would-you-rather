@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { useSelector, useDispatch } from "react-redux";
+import serialize from "form-serialize";
 
 import Answer from "./Answer";
 import { saveAnswer } from "../actions/question";
@@ -10,20 +11,34 @@ const Poll = ({ question, author, answered, user, questionId }) => {
     state.users && state.users.users ? Object.keys(state.users.users).length : 0
   );
   const loading = useSelector((state) => state.questions.loading);
-  const [answer, setAnswer] = React.useState("");
+  const [error, setError] = React.useState("");
   const dispatch = useDispatch();
 
-  const onChange = (event) => {
-    const selectedOption = event.target.value;
-    setAnswer(selectedOption);
+  /**
+   * Clears validation error
+   */
+  const onChange = () => {
+    setError("");
   };
 
-  const onAnswer = () => {
+  /**
+   * Submits for data
+   * @param {*} event
+   * @returns
+   */
+  const onSubmit = (event) => {
+    event.preventDefault();
+    const values = serialize(event.target, { hash: true });
+    if (!values.option) {
+      setError("Setect an option");
+      return;
+    }
+
     dispatch(
       saveAnswer({
         authedUser: user,
         qid: questionId,
-        answer,
+        answer: values.option,
       })
     );
   };
@@ -31,7 +46,7 @@ const Poll = ({ question, author, answered, user, questionId }) => {
   return (
     <div
       className="d-flex flex-column border mb-3"
-      style={{ borderRadius: "10px" }}
+      style={{ borderRadius: "10px", textAlign: "left" }}
     >
       <div
         className="p-3 lead rounded-top"
@@ -59,7 +74,7 @@ const Poll = ({ question, author, answered, user, questionId }) => {
               <Answer question={question} voters={voters} user={user} />
             </>
           ) : (
-            <>
+            <form onSubmit={onSubmit}>
               <div className="lead" style={{ fontWeight: "600" }}>
                 Would you rather...
               </div>
@@ -69,9 +84,9 @@ const Poll = ({ question, author, answered, user, questionId }) => {
                     <input
                       type="radio"
                       className="form-check-input"
-                      name="optradio"
+                      name="option"
                       value="optionOne"
-                      onChange={(event) => onChange(event)}
+                      onChange={onChange}
                     />
                     {question.optionOne.text}
                   </span>
@@ -81,24 +96,21 @@ const Poll = ({ question, author, answered, user, questionId }) => {
                     <input
                       type="radio"
                       className="form-check-input"
-                      name="optradio"
+                      name="option"
                       value="optionTwo"
-                      onChange={(event) => onChange(event)}
+                      onChange={onChange}
                     />
                     {question.optionTwo.text}
                   </span>
                 </div>
               </div>
+              {error && <div className="text-danger align-left">{error}</div>}
               <div style={{ paddingTop: "20px" }}>
-                <button
-                  className="btn btn-primary w-100"
-                  disabled={loading}
-                  onClick={onAnswer}
-                >
-                  {loading ? <div class="spinner-border"></div> : "Submit"}
+                <button className="btn btn-primary w-100" disabled={loading}>
+                  {loading ? <div className="spinner-border"></div> : "Submit"}
                 </button>
               </div>
-            </>
+            </form>
           )}
         </div>
       </div>
@@ -108,14 +120,16 @@ const Poll = ({ question, author, answered, user, questionId }) => {
 
 Poll.propTypes = {
   question: PropTypes.shape({
-    optionOne: PropTypes.shape({ text: PropTypes.string.isRequired }),
-    optionTwo: PropTypes.shape({ text: PropTypes.string.isRequired }),
+    optionOne: PropTypes.shape({ text: PropTypes.string }),
+    optionTwo: PropTypes.shape({ text: PropTypes.string }),
   }),
   author: PropTypes.shape({
     name: PropTypes.string.isRequired,
     avatarURL: PropTypes.string,
   }),
   answered: PropTypes.func.isRequired,
+  user: PropTypes.string,
+  questionId: PropTypes.string,
 };
 
 export default Poll;

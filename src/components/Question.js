@@ -1,12 +1,13 @@
 import React from "react";
 import moment from "moment";
 import { Link } from "react-router-dom";
+import PropTypes from "prop-types";
 
 const Question = ({ question, author }) => {
   return (
     <div
       className="d-flex flex-column border mb-3"
-      style={{ borderRadius: "10px" }}
+      style={{ borderRadius: "10px", textAlign: "left" }}
     >
       <div
         className="p-3 lead rounded-top"
@@ -46,6 +47,17 @@ const Question = ({ question, author }) => {
       </div>
     </div>
   );
+};
+
+Question.propTypes = {
+  question: PropTypes.shape({
+    timestamp: PropTypes.number,
+    id: PropTypes.string,
+  }),
+  author: PropTypes.shape({
+    name: PropTypes.string,
+    avatarURL: PropTypes.string,
+  }),
 };
 
 export default Question;

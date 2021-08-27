@@ -68,8 +68,8 @@ export const saveQuestion = (question) => {
     const promise = _saveQuestion(question);
     dispatch(saveQuestionRequest(promise));
     promise
-      .then((questions) => {
-        dispatch(saveQuestionSuccess(questions));
+      .then((question) => {
+        dispatch(saveQuestionSuccess(question));
       })
       .catch((error) => {
         dispatch(saveQuestionFailed(error));
