@@ -35,7 +35,9 @@ const Question = ({ match, user }) => {
 
 Question.propTypes = {
   match: PropTypes.shape({
-    params: PropTypes.shape({ question_id: PropTypes.string }),
+    params: PropTypes.shape({
+      question_id: PropTypes.string,
+    }),
   }),
   user: PropTypes.string.isRequired,
 };

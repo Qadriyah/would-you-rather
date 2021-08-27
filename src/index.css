@@ -40,6 +40,7 @@ code {
   border-radius: 10px;
   margin: 90px 30% 0 30%;
   padding: 10px;
+  text-align: center;
 }
 
 .padding-ten {
@@ -61,4 +62,8 @@ code {
 
 .bold {
   font-weight: bold;
+}
+
+.align-left {
+  text-align: left;
 }

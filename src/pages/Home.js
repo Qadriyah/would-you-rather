@@ -1,6 +1,7 @@
 import React from "react";
 import { Tab, Tabs } from "react-bootstrap";
 import { useSelector } from "react-redux";
+import PropTypes from "prop-types";
 
 import Question from "../components/Question";
 
@@ -64,6 +65,10 @@ const Home = ({ user }) => {
       </Tabs>
     </div>
   );
+};
+
+Home.propTypes = {
+  user: PropTypes.string,
 };
 
 export default Home;

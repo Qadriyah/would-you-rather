@@ -45,7 +45,10 @@ const questionReducer = (state = initialState, action) => {
       return {
         ...state,
         loading: false,
-        questions: { ...state.questions },
+        questions: {
+          ...state.questions,
+          [action.payload.id]: action.payload,
+        },
       };
 
     default:
