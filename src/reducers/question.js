@@ -28,6 +28,26 @@ const questionReducer = (state = initialState, action) => {
         questions: action.payload,
       };
 
+    case types.SAVE_QUESTION_REQUEST:
+      return {
+        ...state,
+        loading: true,
+      };
+
+    case types.SAVE_QUESTION_FAILED:
+      return {
+        ...state,
+        loading: false,
+        error: action.payload,
+      };
+
+    case types.SAVE_QUESTION_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        questions: { ...state.questions },
+      };
+
     default:
       return state;
   }
