@@ -1,5 +1,10 @@
 import * as types from "../constants/question";
-import { _getQuestions } from "../api/index";
+import { getUsers } from "./user";
+import {
+  _getQuestions,
+  _saveQuestion,
+  _saveQuestionAnswer,
+} from "../api/index";
 
 const getQuestionsRequest = (promise) => {
   return {
@@ -32,6 +37,80 @@ export const getQuestions = () => {
       })
       .catch((error) => {
         dispatch(getQuestionsFailed(error));
+      });
+    return promise;
+  };
+};
+
+const saveQuestionRequest = (promise) => {
+  return {
+    type: types.SAVE_QUESTION_REQUEST,
+    payload: promise,
+  };
+};
+
+const saveQuestionFailed = (error) => {
+  return {
+    type: types.SAVE_QUESTION_REQUEST,
+    payload: error,
+  };
+};
+
+const saveQuestionSuccess = (question) => {
+  return {
+    type: types.SAVE_QUESTION_SUCCESS,
+    payload: question,
+  };
+};
+
+export const saveQuestion = (question) => {
+  return (dispatch) => {
+    const promise = _saveQuestion(question);
+    dispatch(saveQuestionRequest(promise));
+    promise
+      .then((questions) => {
+        dispatch(saveQuestionSuccess(questions));
+      })
+      .catch((error) => {
+        dispatch(saveQuestionFailed(error));
+      });
+    return promise;
+  };
+};
+
+const saveAnswerRequest = (promise) => {
+  return {
+    type: types.SAVE_ANSWER_REQUEST,
+    payload: promise,
+  };
+};
+
+const saveAnswerFailed = (error) => {
+  return {
+    type: types.SAVE_ANSWER_FAILED,
+    payload: error,
+  };
+};
+
+const saveAnswerSuccess = (answer) => {
+  return {
+    type: types.SAVE_ANSWER_SUCCESS,
+    payload: answer,
+  };
+};
+
+export const saveAnswer = (answer) => {
+  return (dispatch) => {
+    const promise = _saveQuestionAnswer(answer);
+    dispatch(saveAnswerRequest(promise));
+    promise
+      .then((questions) => {
+        dispatch(saveAnswerSuccess(questions));
+        getQuestions()(dispatch);
+        getUsers()(dispatch);
+      })
+      .catch((error) => {
+        dispatch(saveAnswerFailed(error));
       });
     return promise;
   };

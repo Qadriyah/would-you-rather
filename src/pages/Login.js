@@ -23,7 +23,7 @@ const Login = ({ history, user }) => {
   };
 
   return (
-    <div className="main-content">
+    <div className="main-content" style={{ textAlign: "center" }}>
       <div
         style={{
           borderBottom: "solid",

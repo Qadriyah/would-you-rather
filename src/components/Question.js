@@ -1,5 +1,6 @@
 import React from "react";
 import moment from "moment";
+import { Link } from "react-router-dom";
 
 const Question = ({ question, author }) => {
   return (
@@ -8,7 +9,7 @@ const Question = ({ question, author }) => {
       style={{ borderRadius: "10px" }}
     >
       <div
-        className="p-3 lead"
+        className="p-3 lead rounded-top"
         style={{ backgroundColor: "#f2f2f2", fontWeight: "600" }}
       >
         {`${author.name} asks:`}
@@ -37,7 +38,9 @@ const Question = ({ question, author }) => {
             Would you rather...
           </div>
           <div style={{ paddingTop: "20px" }}>
-            <button className="btn btn-primary w-100">View Poll</button>
+            <Link to={`/questions/${question.id}`}>
+              <button className="btn btn-primary w-100">View Poll</button>
+            </Link>
           </div>
         </div>
       </div>
