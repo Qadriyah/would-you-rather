@@ -32,11 +32,7 @@ const App = () => {
         render={(props) => <NavBar {...props} user={user} />}
       />
       <Switch>
-        <Route
-          exact
-          path="/"
-          render={(props) => <Login {...props} user={user} />}
-        />
+        <Route exact path="/" render={(props) => <Login {...props} />} />
         <ProtectedRoute exact path="/home" component={Home} />
         <ProtectedRoute exact path="/add" component={NewQuestion} />
         <ProtectedRoute exact path="/leaderboard" component={LeaderBoard} />

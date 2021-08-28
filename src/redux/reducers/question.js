@@ -2,6 +2,7 @@ import * as types from "../constants/question";
 
 const initialState = {
   loading: false,
+  requesting: false,
   error: null,
   questions: null,
 };
@@ -31,20 +32,20 @@ const questionReducer = (state = initialState, action) => {
     case types.SAVE_QUESTION_REQUEST:
       return {
         ...state,
-        loading: true,
+        requesting: true,
       };
 
     case types.SAVE_QUESTION_FAILED:
       return {
         ...state,
-        loading: false,
+        requesting: false,
         error: action.payload,
       };
 
     case types.SAVE_QUESTION_SUCCESS:
       return {
         ...state,
-        loading: false,
+        requesting: false,
         questions: {
           ...state.questions,
           [action.payload.id]: action.payload,

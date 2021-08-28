@@ -1,4 +1,5 @@
 import * as types from "../constants/user";
+import { SAVE_USER_QUESTION_SUCCESS } from "../constants/question";
 
 const initialState = {
   loading: false,
@@ -26,6 +27,22 @@ const userReducer = (state = initialState, action) => {
         ...state,
         loading: false,
         users: action.payload,
+      };
+
+    case SAVE_USER_QUESTION_SUCCESS:
+      const { author } = action.payload;
+      return {
+        ...state,
+        users: {
+          ...state.users,
+          [author]: {
+            ...state.users[author],
+            questions: [
+              ...state.users[author].questions,
+              ...[action.payload.id],
+            ],
+          },
+        },
       };
 
     default:

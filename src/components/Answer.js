@@ -43,7 +43,7 @@ const Answer = ({ question, voters, user }) => {
           backgroundColor: `${myAnswer === "optionTwo" ? "#a4cffc" : "#fff"}`,
         }}
       >
-        <div className="bold">Would you rather be a back-end developer?</div>
+        <div className="bold">{`Would you rather ${optionTwo.text}?`}</div>
         <div className="progress mt-2 mb-2">
           <div
             className="progress-bar"

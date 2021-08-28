@@ -1,9 +1,17 @@
 import React from "react";
 import { Route, Redirect } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { loginUserRequest } from "../redux/actions/login";
 
 const ProtectedRoute = ({ component: Component, ...rest }) => {
-  const { user } = useSelector((state) => state.authUser);
+  const dispatch = useDispatch();
+  const user = localStorage.getItem("user")
+    ? JSON.parse(localStorage.getItem("user")).id
+    : null;
+
+  React.useEffect(() => {
+    dispatch(loginUserRequest(JSON.parse(localStorage.getItem("user"))));
+  }, [dispatch, user]);
 
   return (
     <Route
