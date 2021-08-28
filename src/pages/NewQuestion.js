@@ -7,7 +7,7 @@ import { saveQuestion } from "../redux/actions/question";
 
 const NewQuestion = ({ user, history }) => {
   const dispatch = useDispatch();
-  const { loading } = useSelector((state) => state.questions);
+  const { requesting } = useSelector((state) => state.questions);
   const [error, setError] = React.useState({});
 
   /**
@@ -98,8 +98,8 @@ const NewQuestion = ({ user, history }) => {
               </div>
             )}
             <div className="mt-2">
-              <button className="btn btn-primary w-100" disabled={loading}>
-                {loading ? <div className="spinner-border"></div> : "Submit"}
+              <button className="btn btn-primary w-100" disabled={requesting}>
+                {requesting ? <div className="spinner-border" /> : "Submit"}
               </button>
             </div>
           </div>

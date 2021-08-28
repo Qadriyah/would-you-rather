@@ -14,55 +14,60 @@ const Home = ({ user }) => {
         )
       : []
   );
+  const { loading } = useSelector((state) => state.questions);
 
   return (
     <div className="main-content">
-      <Tabs
-        defaultActiveKey="unanswered"
-        id="uncontrolled-tab"
-        className="mb-3"
-      >
-        <Tab eventKey="unanswered" title="Unanswered Questions">
-          {questions
-            .map((question) => {
-              const votes = [
-                ...question.optionOne.votes,
-                ...question.optionTwo.votes,
-              ];
-              if (!votes.includes(user)) {
-                return (
-                  <Question
-                    key={question.id}
-                    question={question}
-                    author={users[question.author]}
-                  />
-                );
-              }
-              return null;
-            })
-            .filter((item) => item !== null)}
-        </Tab>
-        <Tab eventKey="answered" title="Answered Questions">
-          {questions
-            .map((question) => {
-              const votes = [
-                ...question.optionOne.votes,
-                ...question.optionTwo.votes,
-              ];
-              if (votes.includes(user)) {
-                return (
-                  <Question
-                    key={question.id}
-                    question={question}
-                    author={users[question.author]}
-                  />
-                );
-              }
-              return null;
-            })
-            .filter((item) => item !== null)}
-        </Tab>
-      </Tabs>
+      {loading ? (
+        <div className="spinner-border" />
+      ) : (
+        <Tabs
+          defaultActiveKey="unanswered"
+          id="uncontrolled-tab"
+          className="mb-3"
+        >
+          <Tab eventKey="unanswered" title="Unanswered Questions">
+            {questions
+              .map((question) => {
+                const votes = [
+                  ...question.optionOne.votes,
+                  ...question.optionTwo.votes,
+                ];
+                if (!votes.includes(user)) {
+                  return (
+                    <Question
+                      key={question.id}
+                      question={question}
+                      author={users[question.author]}
+                    />
+                  );
+                }
+                return null;
+              })
+              .filter((item) => item !== null)}
+          </Tab>
+          <Tab eventKey="answered" title="Answered Questions">
+            {questions
+              .map((question) => {
+                const votes = [
+                  ...question.optionOne.votes,
+                  ...question.optionTwo.votes,
+                ];
+                if (votes.includes(user)) {
+                  return (
+                    <Question
+                      key={question.id}
+                      question={question}
+                      author={users[question.author]}
+                    />
+                  );
+                }
+                return null;
+              })
+              .filter((item) => item !== null)}
+          </Tab>
+        </Tabs>
+      )}
     </div>
   );
 };

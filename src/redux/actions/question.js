@@ -63,6 +63,13 @@ const saveQuestionSuccess = (question) => {
   };
 };
 
+const saveUserQuestion = (question) => {
+  return {
+    type: types.SAVE_USER_QUESTION_SUCCESS,
+    payload: question,
+  };
+};
+
 export const saveQuestion = (question) => {
   return (dispatch) => {
     const promise = _saveQuestion(question);
@@ -70,6 +77,7 @@ export const saveQuestion = (question) => {
     promise
       .then((question) => {
         dispatch(saveQuestionSuccess(question));
+        dispatch(saveUserQuestion(question));
       })
       .catch((error) => {
         dispatch(saveQuestionFailed(error));

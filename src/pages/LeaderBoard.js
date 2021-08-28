@@ -20,12 +20,15 @@ const LeaderBoard = () => {
           )
       : []
   );
+  const { loading } = useSelector((state) => state.questions);
 
   return (
     <div className="main-content">
-      {users.map((user) => (
-        <ScoreCard user={user} />
-      ))}
+      {loading ? (
+        <div className="spinner-border" />
+      ) : (
+        users.map((user) => <ScoreCard key={user.id} user={user} />)
+      )}
     </div>
   );
 };

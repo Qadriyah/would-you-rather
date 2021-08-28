@@ -1,16 +1,13 @@
 import React from "react";
 import { Navbar, Container, Nav } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
 
 const NavBar = ({ user, location }) => {
   const [active, setActive] = React.useState(location.pathname);
-  const { users } = useSelector((state) => state.users);
+
   React.useEffect(() => {
     setActive(location.pathname);
   }, [location.pathname]);
-
-  const userData = user ? users[user] : null;
 
   return (
     <Navbar
@@ -55,17 +52,13 @@ const NavBar = ({ user, location }) => {
           <Nav>
             <Nav.Link>
               <div className="d-flex">
-                <div className="pr-2 text-white">
-                  {userData ? userData.name : ""}
-                </div>
+                <div className="pr-2 text-white">{user ? user.name : ""}</div>
                 <div
                   className="rounded-circle border border-light"
                   style={{
                     width: "25px",
                     height: "25px",
-                    backgroundImage: `url(${
-                      userData ? userData.avatarURL : ""
-                    })`,
+                    backgroundImage: `url(${user ? user.avatarURL : ""})`,
                     backgroundRepeat: "no-repeat",
                     backgroundPosition: "center",
                     backgroundSize: "contain",

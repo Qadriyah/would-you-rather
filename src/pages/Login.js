@@ -5,21 +5,17 @@ import { Dropdown, Button } from "react-bootstrap";
 import logo from "../logo.svg";
 import { loginUser } from "../redux/actions/login";
 
-const Login = ({ history, user }) => {
+const Login = ({ history }) => {
   const [selectedItem, setSelectedItem] = React.useState({
     name: "Select User",
   });
   const { users } = useSelector((state) => state.users);
-
-  React.useEffect(() => {
-    if (user) {
-      history.push("/home");
-    }
-  }, [history, user]);
   const dispatch = useDispatch();
 
   const onSubmit = () => {
-    dispatch(loginUser(selectedItem.id));
+    dispatch(loginUser(selectedItem.id)).then(() => {
+      history.push("/home");
+    });
   };
 
   return (
