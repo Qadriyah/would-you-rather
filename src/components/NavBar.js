@@ -6,6 +6,10 @@ import { useSelector } from "react-redux";
 const NavBar = ({ user, location }) => {
   const [active, setActive] = React.useState(location.pathname);
   const { users } = useSelector((state) => state.users);
+  React.useEffect(() => {
+    setActive(location.pathname);
+  }, [location.pathname]);
+
   const userData = user ? users[user] : null;
 
   return (

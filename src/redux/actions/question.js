@@ -4,7 +4,7 @@ import {
   _getQuestions,
   _saveQuestion,
   _saveQuestionAnswer,
-} from "../api/index";
+} from "../../api/index";
 
 const getQuestionsRequest = (promise) => {
   return {

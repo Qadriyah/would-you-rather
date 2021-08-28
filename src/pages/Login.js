@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { Dropdown, Button } from "react-bootstrap";
 
 import logo from "../logo.svg";
-import { loginUser } from "../actions/login";
+import { loginUser } from "../redux/actions/login";
 
 const Login = ({ history, user }) => {
   const [selectedItem, setSelectedItem] = React.useState({

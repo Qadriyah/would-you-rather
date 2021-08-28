@@ -3,7 +3,7 @@ import serializeForm from "form-serialize";
 import { useDispatch, useSelector } from "react-redux";
 import PropTypes from "prop-types";
 
-import { saveQuestion } from "../actions/question";
+import { saveQuestion } from "../redux/actions/question";
 
 const NewQuestion = ({ user, history }) => {
   const dispatch = useDispatch();
