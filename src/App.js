@@ -4,7 +4,8 @@ import { useDispatch, useSelector } from "react-redux";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 import "./App.css";
-import { getUsers } from "./actions/user";
+import { getUsers } from "./redux/actions/user";
+import { getQuestions } from "./redux/actions/question";
 import Login from "./pages/Login";
 import Home from "./pages/Home";
 import Question from "./pages/Question";
@@ -14,7 +15,6 @@ import ProtectedRoute from "./components/ProtectedRoute";
 import NewQuestion from "./pages/NewQuestion";
 import NavBar from "./components/NavBar";
 import Logout from "./components/Logout";
-import { getQuestions } from "./actions/question";
 
 const App = () => {
   const dispatch = useDispatch();

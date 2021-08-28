@@ -1,5 +1,5 @@
 import * as types from "../constants/user";
-import { _getUsers } from "../api/index";
+import { _getUsers } from "../../api/index";
 
 const getUsersRequest = (promise) => {
   return {

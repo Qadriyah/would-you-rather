@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import serialize from "form-serialize";
 
 import Answer from "./Answer";
-import { saveAnswer } from "../actions/question";
+import { saveAnswer } from "../redux/actions/question";
 
 const Poll = ({ question, author, answered, user, questionId }) => {
   const voters = useSelector((state) =>
