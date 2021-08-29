@@ -3,32 +3,51 @@ import { useSelector } from "react-redux";
 import PropTypes from "prop-types";
 
 import Poll from "../components/Poll";
+import isEmpty from "../utils/isEmpty";
+import NotFound from "../components/404";
 
 const Question = ({ match, user }) => {
   const { question_id } = match.params;
   const question = useSelector((state) =>
     state.questions && state.questions.questions
-      ? state.questions.questions[question_id]
-      : null
-  );
-  const author = useSelector((state) =>
-    state.users && state.users.users ? state.users.users[question.author] : null
+      ? state.questions.questions[question_id] ?? {}
+      : {}
   );
 
-  const answered = () =>
-    [...question.optionOne.votes, ...question.optionTwo.votes].includes(user)
-      ? true
-      : false;
+  const author = useSelector((state) =>
+    state.users && state.users.users
+      ? state.users.users[question.author] ?? {}
+      : {}
+  );
+  const { loading } = useSelector((state) => state.questions);
+
+  const answered = () => {
+    if (!isEmpty(question)) {
+      return [
+        ...question.optionOne.votes,
+        ...question.optionTwo.votes,
+      ].includes(user)
+        ? true
+        : false;
+    }
+    return false;
+  };
 
   return (
     <div className="main-content">
-      <Poll
-        question={question}
-        author={author}
-        answered={answered}
-        user={user}
-        questionId={question_id}
-      />
+      {loading ? (
+        <div className="spinner-border" />
+      ) : isEmpty(question) ? (
+        <NotFound label="Poll not found" />
+      ) : (
+        <Poll
+          question={question}
+          author={author}
+          answered={answered}
+          user={user}
+          questionId={question_id}
+        />
+      )}
     </div>
   );
 };

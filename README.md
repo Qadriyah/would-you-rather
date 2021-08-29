@@ -1,6 +1,6 @@
 # Would you Rather Project
 
-"Would You Rather?" is a game where a user is asked a question in the form Would you rather [option A] or [option B]? and the user selects one answer. Selecting neither or both is not allowed.
+"Would You Rather?" is a game where a user is asked a question in the form Would you rather [option A] or [option B]? The user can only select one answer. Selecting neither or both is not allowed.
 
 ## Table of contents
 

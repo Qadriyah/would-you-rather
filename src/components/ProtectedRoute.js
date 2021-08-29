@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux";
 import { loginUserRequest } from "../redux/actions/login";
 
 const ProtectedRoute = ({ component: Component, ...rest }) => {
+  const { location } = rest;
   const dispatch = useDispatch();
   const user = localStorage.getItem("user")
     ? JSON.parse(localStorage.getItem("user")).id
@@ -17,7 +18,16 @@ const ProtectedRoute = ({ component: Component, ...rest }) => {
     <Route
       {...rest}
       render={(props) =>
-        user ? <Component {...props} user={user} /> : <Redirect to="/" />
+        user ? (
+          <Component {...props} user={user} />
+        ) : (
+          <Redirect
+            to={{
+              pathname: "/",
+              state: { referrer: location.pathname },
+            }}
+          />
+        )
       }
     />
   );
