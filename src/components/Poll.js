@@ -66,7 +66,7 @@ const Poll = ({ question, author, answered, user, questionId }) => {
         <div
           className="p-3 flex-fill"
           style={{
-            borderLeft: "solid 2px #f2f2f2",
+            borderLeft: "solid thin rgba(0,0,0,.15)",
           }}
         >
           {answered() ? (

@@ -67,7 +67,7 @@ const NavBar = ({ user, location }) => {
               </div>
             </Nav.Link>
             <Link to="/logout" className="nav-link">
-              <i className="fas fa-cloud">Logout</i>
+              Logout
             </Link>
           </Nav>
         </Navbar.Collapse>

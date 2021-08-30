@@ -63,7 +63,7 @@ const NewQuestion = ({ user, history }) => {
       >
         Create New Qestion
       </div>
-      <div style={{ textAlign: "left" }}>
+      <div className="align-left">
         <form onSubmit={onSubmit}>
           <div className="pb-2 pt-4">Complete the question</div>
           <div className="bold pt-2 pb-2">Would you rather ...</div>

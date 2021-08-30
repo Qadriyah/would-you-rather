@@ -27,9 +27,7 @@ const Question = ({ question, author }) => {
         <div
           className="p-3 flex-fill"
           style={{
-            borderLeftWidth: "1px",
-            borderLeft: "solid",
-            borderLeftColor: "#f2f2f2",
+            borderLeft: "solid thin rgba(0,0,0,.15)",
           }}
         >
           <span className="small font-italic">

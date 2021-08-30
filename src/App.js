@@ -15,6 +15,7 @@ import ProtectedRoute from "./components/ProtectedRoute";
 import NewQuestion from "./pages/NewQuestion";
 import NavBar from "./components/NavBar";
 import Logout from "./components/Logout";
+import Register from "./pages/Register";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -42,6 +43,7 @@ const App = () => {
           component={Question}
         />
         <ProtectedRoute exact path="/logout" component={Logout} />
+        <Route exact path="/register" component={Register} />
         <Route path="*" component={NotFoundPage} />
       </Switch>
     </div>

@@ -203,3 +203,23 @@ export function _saveQuestionAnswer({ authedUser, qid, answer }) {
     }, 500);
   });
 }
+
+export function _saveUser({ name, avatarURL }) {
+  return new Promise((res, rej) => {
+    const id = name.toLowerCase().split(" ").join("");
+    const user = {
+      id,
+      name,
+      avatarURL,
+      answers: {},
+      questions: [],
+    };
+    setTimeout(() => {
+      users = {
+        ...users,
+        [id]: user,
+      };
+      res(user);
+    }, 1000);
+  });
+}
