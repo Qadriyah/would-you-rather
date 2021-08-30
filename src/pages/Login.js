@@ -2,10 +2,17 @@ import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Dropdown, Button } from "react-bootstrap";
 
-import logo from "../logo.svg";
 import { loginUser } from "../redux/actions/login";
+import { Link } from "react-router-dom";
 
-const Login = ({ history }) => {
+const Login = ({ history, location }) => {
+  React.useEffect(() => {
+    const user = localStorage.getItem("user");
+    const { referrer } = location && location.state ? location.state : "";
+    if (user) {
+      referrer ? history.push(referrer) : history.push("/home");
+    }
+  });
   const [selectedItem, setSelectedItem] = React.useState({
     name: "Select User",
   });
@@ -13,24 +20,18 @@ const Login = ({ history }) => {
   const dispatch = useDispatch();
 
   const onSubmit = () => {
-    dispatch(loginUser(selectedItem.id)).then(() => {
-      history.push("/home");
-    });
+    dispatch(loginUser(selectedItem.id));
   };
 
   return (
-    <div className="main-content" style={{ textAlign: "center" }}>
+    <div className="main-content">
       <div
+        className="rounded-top p-3"
         style={{
-          borderBottom: "solid",
-          borderBottomWidth: "1px",
-          borderBottomColor: "rgba(0,0,0,.15)",
-          padding: "10px",
+          borderBottom: "solid 1px rgba(0,0,0,.15)",
           margin: "-10px -10px 0 -10px",
           backgroundColor: "#f2f2f2",
           height: "100px",
-          borderTopRightRadius: "10px",
-          borderTopLeftRadius: "10px",
         }}
       >
         <div>
@@ -38,10 +39,7 @@ const Login = ({ history }) => {
         </div>
         <div>Please sign in to continue</div>
       </div>
-      <div>
-        <img src={logo} className="App-logo" alt="logo" />
-      </div>
-      <div style={{ padding: "10px" }}>
+      <div style={{ padding: "100px 0 10px 0" }}>
         <h4>Sign in</h4>
       </div>
       <div>
@@ -69,6 +67,9 @@ const Login = ({ history }) => {
         <Button variant="primary" onClick={onSubmit}>
           Sign in
         </Button>
+      </div>
+      <div className="pt-3 pb-3 align-left">
+        Or <Link to="/register">Register</Link>
       </div>
     </div>
   );

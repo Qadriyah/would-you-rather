@@ -1,5 +1,5 @@
 import React from "react";
-import { Route, Switch, Redirect } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import "bootstrap/dist/css/bootstrap.min.css";
 
@@ -10,11 +10,12 @@ import Login from "./pages/Login";
 import Home from "./pages/Home";
 import Question from "./pages/Question";
 import LeaderBoard from "./pages/LeaderBoard";
-import NotFound from "./pages/NotFound";
+import NotFoundPage from "./pages/NotFound";
 import ProtectedRoute from "./components/ProtectedRoute";
 import NewQuestion from "./pages/NewQuestion";
 import NavBar from "./components/NavBar";
 import Logout from "./components/Logout";
+import Register from "./pages/Register";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -42,8 +43,8 @@ const App = () => {
           component={Question}
         />
         <ProtectedRoute exact path="/logout" component={Logout} />
-        <Route component={NotFound} />
-        <Redirect to="/home" />
+        <Route exact path="/register" component={Register} />
+        <Route path="*" component={NotFoundPage} />
       </Switch>
     </div>
   );

@@ -4,8 +4,8 @@ import PropTypes from "prop-types";
 const ScoreCard = ({ user }) => {
   return (
     <div
-      className="d-flex flex-row border mb-3"
-      style={{ borderRadius: "10px", textAlign: "left" }}
+      className="d-flex flex-row border mb-3 align-left"
+      style={{ borderRadius: "10px", alignItems: "center" }}
     >
       <div className="p-4">
         <img
@@ -38,7 +38,7 @@ const ScoreCard = ({ user }) => {
         </div>
       </div>
       <div className="p-3">
-        <div className="border rounded h-100 d-flex flex-column align-items-center">
+        <div className="border rounded d-flex flex-column align-items-center">
           <div
             style={{
               backgroundColor: "#f2f2f2",
@@ -49,7 +49,7 @@ const ScoreCard = ({ user }) => {
           >
             Score
           </div>
-          <div className="d-flex flex-column flex-fill justify-content-center">
+          <div className="pt-3 pb-3">
             <div
               className="border rounded-circle text-center bg-primary text-white bold"
               style={{

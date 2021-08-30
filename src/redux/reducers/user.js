@@ -3,6 +3,7 @@ import { SAVE_USER_QUESTION_SUCCESS } from "../constants/question";
 
 const initialState = {
   loading: false,
+  registering: false,
   error: null,
   users: null,
 };
@@ -42,6 +43,29 @@ const userReducer = (state = initialState, action) => {
               ...[action.payload.id],
             ],
           },
+        },
+      };
+
+    case types.ADD_USER_REQUEST:
+      return {
+        ...state,
+        registering: true,
+      };
+
+    case types.ADD_USER_FAILED:
+      return {
+        ...state,
+        registering: false,
+        error: action.payload,
+      };
+
+    case types.ADD_USER_SUCCESS:
+      return {
+        ...state,
+        registering: false,
+        users: {
+          ...state.users,
+          [action.payload.id]: action.payload,
         },
       };
 

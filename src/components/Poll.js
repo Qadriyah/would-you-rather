@@ -66,7 +66,7 @@ const Poll = ({ question, author, answered, user, questionId }) => {
         <div
           className="p-3 flex-fill"
           style={{
-            borderLeft: "solid 2px #f2f2f2",
+            borderLeft: "solid thin rgba(0,0,0,.15)",
           }}
         >
           {answered() ? (
@@ -88,7 +88,7 @@ const Poll = ({ question, author, answered, user, questionId }) => {
                       value="optionOne"
                       onChange={onChange}
                     />
-                    {question.optionOne.text}
+                    {question.optionOne ? question.optionOne.text : ""}
                   </span>
                 </div>
                 <div className="form-check">
@@ -100,7 +100,7 @@ const Poll = ({ question, author, answered, user, questionId }) => {
                       value="optionTwo"
                       onChange={onChange}
                     />
-                    {question.optionTwo.text}
+                    {question.optionTwo ? question.optionTwo.text : ""}
                   </span>
                 </div>
               </div>
@@ -124,7 +124,7 @@ Poll.propTypes = {
     optionTwo: PropTypes.shape({ text: PropTypes.string }),
   }),
   author: PropTypes.shape({
-    name: PropTypes.string.isRequired,
+    name: PropTypes.string,
     avatarURL: PropTypes.string,
   }),
   answered: PropTypes.func.isRequired,
