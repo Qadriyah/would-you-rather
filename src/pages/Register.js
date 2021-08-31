@@ -1,8 +1,10 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import serializeForm from "form-serialize";
-import { addUser } from "../redux/actions/user";
 import { Link } from "react-router-dom";
+import PropTypes from "prop-types";
+
+import { addUser } from "../redux/actions/user";
 
 const Register = ({ history }) => {
   const [error, setError] = React.useState({});
@@ -112,6 +114,10 @@ const Register = ({ history }) => {
       </form>
     </div>
   );
+};
+
+Register.propTypes = {
+  history: PropTypes.shape({ replace: PropTypes.func }),
 };
 
 export default Register;

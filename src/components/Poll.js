@@ -70,9 +70,7 @@ const Poll = ({ question, author, answered, user, questionId }) => {
           }}
         >
           {answered() ? (
-            <>
-              <Answer question={question} voters={voters} user={user} />
-            </>
+            <Answer question={question} voters={voters} user={user} />
           ) : (
             <form onSubmit={onSubmit}>
               <div className="lead" style={{ fontWeight: "600" }}>

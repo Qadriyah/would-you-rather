@@ -1,5 +1,7 @@
 import React from "react";
 import { useDispatch } from "react-redux";
+import PropTypes from "prop-types";
+
 import { logOut } from "../redux/actions/login";
 
 const Logout = ({ history }) => {
@@ -14,6 +16,10 @@ const Logout = ({ history }) => {
       <div>Logout page</div>
     </div>
   );
+};
+
+Logout.propTypes = {
+  history: PropTypes.shape({ push: PropTypes.func }),
 };
 
 export default Logout;

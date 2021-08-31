@@ -1,6 +1,7 @@
 import React from "react";
 import { Navbar, Container, Nav } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import PropTypes from "prop-types";
 
 const NavBar = ({ user, location }) => {
   const [active, setActive] = React.useState(location.pathname);
@@ -74,6 +75,14 @@ const NavBar = ({ user, location }) => {
       </Container>
     </Navbar>
   );
+};
+
+NavBar.propTypes = {
+  user: PropTypes.shape({
+    name: PropTypes.string,
+    avatarURL: PropTypes.string,
+  }),
+  location: PropTypes.shape({ pathname: PropTypes.string }),
 };
 
 export default NavBar;

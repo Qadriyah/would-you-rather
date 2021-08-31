@@ -19,8 +19,12 @@ const Question = ({ match, user }) => {
       ? state.users.users[question.author] ?? {}
       : {}
   );
-  const { loading } = useSelector((state) => state.questions);
 
+  /**
+   * Checks if a question has been answered by the
+   * current user
+   * @returns
+   */
   const answered = () => {
     if (!isEmpty(question)) {
       return [
@@ -35,9 +39,7 @@ const Question = ({ match, user }) => {
 
   return (
     <div className="main-content">
-      {loading ? (
-        <div className="spinner-border" />
-      ) : isEmpty(question) ? (
+      {isEmpty(question) ? (
         <NotFound label="Poll not found" />
       ) : (
         <Poll
@@ -58,6 +60,7 @@ Question.propTypes = {
       question_id: PropTypes.string,
     }),
   }),
+  location: PropTypes.shape({ search: PropTypes.string }),
   user: PropTypes.string.isRequired,
 };
 

@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import PropTypes from "prop-types";
 
 const NotFound = ({ label }) => {
   return (
@@ -14,6 +15,10 @@ const NotFound = ({ label }) => {
       </div>
     </div>
   );
+};
+
+NotFound.propTypes = {
+  label: PropTypes.string.isRequired,
 };
 
 export default NotFound;
