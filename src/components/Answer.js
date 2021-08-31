@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 const Answer = ({ question, voters, user }) => {
   const { optionOne, optionTwo } = question;
@@ -58,6 +59,21 @@ const Answer = ({ question, voters, user }) => {
       </div>
     </div>
   );
+};
+
+Answer.propTypes = {
+  question: PropTypes.shape({
+    optionOne: PropTypes.shape({
+      votes: PropTypes.array,
+      text: PropTypes.string,
+    }),
+    optionTwo: PropTypes.shape({
+      votes: PropTypes.array,
+      text: PropTypes.string,
+    }),
+  }),
+  voters: PropTypes.number,
+  user: PropTypes.string,
 };
 
 export default Answer;

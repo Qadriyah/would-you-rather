@@ -1,23 +1,24 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Dropdown, Button } from "react-bootstrap";
+import PropTypes from "prop-types";
 
 import { loginUser } from "../redux/actions/login";
 import { Link } from "react-router-dom";
 
 const Login = ({ history, location }) => {
+  const [selectedItem, setSelectedItem] = React.useState({
+    name: "Select User",
+  });
+  const { user } = useSelector((state) => state.authUser);
+  const { users } = useSelector((state) => state.users);
+  const dispatch = useDispatch();
   React.useEffect(() => {
-    const user = localStorage.getItem("user");
     const { referrer } = location && location.state ? location.state : "";
     if (user) {
       referrer ? history.push(referrer) : history.push("/home");
     }
   });
-  const [selectedItem, setSelectedItem] = React.useState({
-    name: "Select User",
-  });
-  const { users } = useSelector((state) => state.users);
-  const dispatch = useDispatch();
 
   const onSubmit = () => {
     dispatch(loginUser(selectedItem.id));
@@ -73,6 +74,14 @@ const Login = ({ history, location }) => {
       </div>
     </div>
   );
+};
+
+Login.propTypes = {
+  history: PropTypes.shape({ push: PropTypes.func }),
+  location: PropTypes.shape({
+    state: PropTypes.shape({ referrer: PropTypes.string }),
+    search: PropTypes.string,
+  }),
 };
 
 export default Login;
